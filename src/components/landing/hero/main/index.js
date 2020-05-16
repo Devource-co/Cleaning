@@ -1,5 +1,4 @@
 import React from 'react';
-import Img from'gatsby-image';
 import { Header, Container, Content, Image, BookButton } from './main.styles';
 import NavBar from '../navbar';
 import { useImageQuery } from '../../../../hooks/useImagesQuery';
