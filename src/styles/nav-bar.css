@@ -2,11 +2,9 @@
   height: 100px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   position: relative;
-  width:80%;
-  margin: 0px auto;
 }
 
 .nav > .nav-logo {
