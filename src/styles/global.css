@@ -42,3 +42,5 @@ body {
   width: 25px !important;
   color: #4040a0ea;
 }
+
+*:focus {outline:none !important}
