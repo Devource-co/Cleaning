@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import { useImageQuery } from "../../../../hooks/useImagesQuery"
+import { useImageQuery } from "../../hooks/useImagesQuery"
 
 export default () => {
   const { logo } = useImageQuery()

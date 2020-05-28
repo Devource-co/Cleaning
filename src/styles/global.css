@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 
@@ -6,6 +6,39 @@
 
 @tailwind utilities;
 
+html,
+#___gatsby {
+  height: 100%;
+}
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+}
+.pagination-buttons {
+  border: solid 1px #c6c6ca;
+  margin: 10px 0px;
+  display: inline-flex;
+  flex-direction: row;
+  white-space: nowrap;
+  width: 1px !important;
+  text-align: center;
+}
+.arrows {
+  border: solid 1px #c6c6ca;
+  width: 70px !important;
+  padding: 5px;
+}
+.arrows button {
+  /* width: 70px !important; */
+}
+.pages {
+  display: flex;
+  flex-direction: row;
+  width: 250px !important;
+}
+.pages div {
+  padding: 5px;
+  border: solid 1px #c6c6ca;
+  width: 25px !important;
+  color: #4040a0ea;
 }
