@@ -1,5 +1,8 @@
 import firebase from "firebase"
 import { toast } from "react-toastify"
+import "@firebase/auth"
+import "@firebase/firestore"
+import "@firebase/functions"
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBO-_XgZYsopOA2Tp-Yqvj5mjuzZA7mIes",
