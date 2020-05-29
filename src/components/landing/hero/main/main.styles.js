@@ -46,7 +46,7 @@ export const Content = styled.div`
 
 export const Image = styled(Img)`
   bottom: -3rem;
-  z-index: -1;
+  z-index: 1;
   ${mq({
     width: ['200px','400px'],
     borderRadius: ['25px 5px 5px 5px', '40px 5px 5px 5px']

@@ -2,6 +2,7 @@ import React from 'react';
 import { cx, css } from 'emotion';
 import Collapse from '@kunukn/react-collapse';
 import { AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
+import mq from '../../../utils/responsiveness';
 
 const activeCollapse = css`
   & .btn {    
@@ -10,10 +11,6 @@ const activeCollapse = css`
     color: #fff;
     font-weight: 700;
     & .title-collapse {
-      flex: 7;
-      height: 50px;
-      display: flex;
-      align-items: center;
       background: #2b2b2b;
     }
     & .icon-collapse {
@@ -27,7 +24,7 @@ const activeCollapse = css`
 `;
 
 const itemCollapse =css`
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   & .btn {    
     width: 100%;
     font-size: 20px;
@@ -50,17 +47,21 @@ const collapseBtn = css`
     height: 50px;
     display: flex;
     align-items: center;
+    ${mq({
+      fontSize: ['1rem', '1.125rem', '1.25rem']
+    })};
   }
 
   &:hover {
     background-color: #2b2b2b;
-    color: white;
+    color: white !important;
   }
 
   & .icon-collapse {
     flex: .5;
     height: 50px;
     display: flex;
+    padding: 0 .7rem;
     align-items: center;
     background: #2b2b2b;
     justify-content: space-around;
@@ -101,7 +102,7 @@ const collapsable = ({collapse, toggle, setCollapse, index, title, content}) => 
   return (
     <div className={cx(itemCollapse, { [activeCollapse]: collapse.index === index })}>
       <button className={`btn ${collapseBtn}`} onClick={_ => toggle(index)}>
-        <span className='title-collapse'>{title}</span> <span className='icon-collapse'> { collapse.index === index ? <AiFillCaretDown size="1.7rem" />: <AiFillCaretRight color="white" size="1.7rem" /> } </span>
+        <span className='title-collapse'>{title}</span> <span className='icon-collapse'> { collapse.index === index ? <AiFillCaretDown size="1.3rem" />: <AiFillCaretRight color="white" size="1.3rem" /> } </span>
       </button>
       <Collapse
         className={CollapseCss}

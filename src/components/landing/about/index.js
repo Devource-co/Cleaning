@@ -24,7 +24,7 @@ const About = () => {
         <AboutDetails>
         <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
         <p className={css`
-        padding: 1rem 1rem;
+        padding: 1rem 0rem;
         `}>Choose our cleaners and they will do wonders to your offices or homes. here below are our abouts:</p>
           {data.map(({index, title, content}) => (
           <Collapsable 
