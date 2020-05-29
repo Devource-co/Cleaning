@@ -28,6 +28,10 @@ body {
   width: 70px !important;
   padding: 5px;
 }
+.arrows:hover {
+  background: #4040a0ea !important;
+  color: #fff;
+}
 .arrows button {
   /* width: 70px !important; */
 }
@@ -37,10 +41,18 @@ body {
   width: 250px !important;
 }
 .pages div {
-  padding: 5px;
   border: solid 1px #c6c6ca;
-  width: 25px !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+#kill {
+  padding: 5px 10px;
+  border: solid 1px #c6c6ca;
+  width: 100% !important;
+  height: 100% !important;
   color: #4040a0ea;
 }
 
-*:focus {outline:none !important}
+*:focus {
+  outline: none !important;
+}

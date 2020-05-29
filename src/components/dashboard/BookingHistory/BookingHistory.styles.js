@@ -123,16 +123,18 @@ export const BookingHeader = styled.div`
   justify-content: space-between;
   felx-direction: row;
   font-weight: 500;
-  text-align: center;
   ${mq({
     display: ["none", "none", "none", "flex"],
   })};
   padding: 10px;
 `
-export const BookingContainer = styled.div`
-  text-align: center;
-  font-weight: 450;
-  font-size: 12px;
+export const BookingContainer = styled.button`
+  :hover {
+    color: #fff !important;
+    background: #3e3ea1 !important;
+  }
+  margin-top: 7px;
+  text-align: left;
   border: solid 1px #c6c6ca;
 
   .extra {
@@ -148,6 +150,65 @@ export const BookingContainer = styled.div`
   padding: 10px;
   border-radius: 3px;
   width: 100% !important;
+`
+export const DropDown = styled.div`
+  width: 100% !important;
+  padding: 10px 0px;
+  border: solid 1px #c6c6ca;
+  border-top: none;
+
+  display: flex;
+  flex-direction: row;
+  :nth-child(2n + 2) {
+    background: #fff;
+  }
+  div {
+    width: unset;
+  }
+  .updateContainer {
+    width: 38%;
+    display: flex;
+  }
+  .details {
+    width: 58% !important;
+  }
+`
+export const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0px auto;
+  padding: 2%;
+  .extra {
+    font-style: italic;
+    font-size: 11px;
+    color: #666671;
+  }
+  .detailsHeader {
+    border-bottom: 1px solid #c6c6ca;
+    text-align: center;
+  }
+  .detailsBody {
+    border-bottom: 1px solid #c6c6ca;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    div {
+      min-width:100px
+      margin: 15px;
+      display:flex;
+      flex-direction:column;
+    }
+  }
+  .detailsFooter {
+  }
+`
+export const UpdateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 1%;
+  border-radius: 3px;
 `
 export const SubDiv = styled.div`
   display: flex;

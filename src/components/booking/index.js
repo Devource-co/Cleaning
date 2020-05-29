@@ -46,25 +46,18 @@ export default () => {
   }, [])
   const handleSigninInputChange = e => {
     if (e.target) {
-      console.log("==========jjj==========", e)
-
       e.preventDefault()
       const { name, value } = e.target
       setSignInData({ ...signInData, [name]: value })
     } else {
-      console.log("=======lll=============", e)
-
       if (e.name) {
-        console.log("========fdkjghkjdfhjghdfj============", e)
         const { label, value, name } = e
         setSignInData({ ...signInData, [name]: label })
       } else {
         setSignInData({ ...signInData, [e[0].name]: e })
-        console.log("======mm==============", signInData, e)
       }
     }
   }
-  console.log("======mm==============", signInData)
 
   const getUserData = async () => {
     await firebase
@@ -183,7 +176,7 @@ export default () => {
                 onChange={e =>
                   handleSigninInputChange({
                     name: e.name,
-                    label: { label: e.label },
+                    label: { label: e.label, value: e.value },
                   })
                 }
               />
@@ -232,7 +225,7 @@ export default () => {
           </InputRow>
           <InputRow>
             <div style={{ width: "100%" }}>
-              <BookingLabel htmlFor="name">Additional information</BookingLabel>
+              <BookingLabel htmlFor="info">Additional information</BookingLabel>
               <textarea
                 style={{
                   width: "100%",
@@ -241,8 +234,8 @@ export default () => {
                   border: "solid 1px #c6c6ca",
                   marginBottom: "20px",
                 }}
-                id="address"
-                name="address"
+                id="info"
+                name="info"
                 onChange={handleSigninInputChange}
                 type="text"
                 placeholder="Enter additional information"

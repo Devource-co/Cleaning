@@ -1,8 +1,6 @@
 import { Doughnut } from "react-chartjs-2"
 import React from "react"
-import { css } from "emotion"
 import { chartOptions, chartData } from "./chartHelper"
-import PieChart from "react-simple-pie-chart"
 
 export default ({ chartLabels, reads, messages, failledSearches }) => {
   const data = chartData(

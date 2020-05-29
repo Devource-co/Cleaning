@@ -17,6 +17,8 @@ export const GraphContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   .grapgh {
+    margin-top: 10px;
+
     height: 350px;
     border-radius: 4px;
     ${mq({
@@ -109,6 +111,7 @@ export const H2 = styled.div`
 `
 export const Chart = styled.div`
   display: flex;
+
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
