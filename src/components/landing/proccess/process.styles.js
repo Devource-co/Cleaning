@@ -2,9 +2,11 @@ import styled from '@emotion/styled';
 import mq from '../../../utils/responsiveness';
 
 export const Container = styled.div`
-  width: 80%;
   margin: 1rem auto;
   margin-top: 8rem;
+  ${mq({
+    width: ['90%', '85%', '80%', '75%']
+  })};
 `;
 
 export const H1 = styled.h1`

@@ -1,31 +1,47 @@
-import React from 'react';
-import { Container, ContainerInner, BorderTitle, AboutDetails, AboutVideo } from './about.styles';
+import React, { useState } from 'react';
+import { css } from 'emotion';
+import {
+  Container,
+  ContainerInner,
+  BorderTitle,
+  AboutDetails,
+  AboutVideo
+} from './about.styles';
+import Collapsable from './collapsable';
+import data from '../../../data/about.data';
 
-const about = () => {
+const About = () => {
+  const [collapse, setCollapse] = useState({
+    index: 1,
+  });
+
+  console.log(collapse);
+  const toggle = index => setCollapse(state => ({ ...state, index: state.index === index ? null : index}));
+
   return (
     <Container>
       <ContainerInner>
         <AboutDetails>
         <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
-        <p>Choose our cleaners and they will do wonder to your offices or homes. here below are our abouts</p>
-        <div>
-          <h2>Our History</h2>
-          <p>lorem ipsum blah blah</p>
-        </div>
-        <div>
-          <h2>Our Mission</h2>
-          <p>lorem ipsum blah blah</p>
-        </div>
-        <div>
-          <h2>Our Vision</h2>
-          <p>lorem ipsum blah blah</p>
-        </div>
+        <p className={css`
+        padding: 1rem 0rem;
+        `}>Choose our cleaners and they will do wonders to your offices or homes. here below are our abouts:</p>
+          {data.map(({index, title, content}) => (
+          <Collapsable 
+            index={index}
+            key={index}
+            title={title}
+            content={content}
+            collapse={collapse}
+            toggle={toggle}
+            setCollapse={setCollapse}
+            />))}
         </AboutDetails>
         <AboutVideo></AboutVideo>
       </ContainerInner>
     </Container>
   );
-}
+};
 
-export default about;
+export default About;
 
