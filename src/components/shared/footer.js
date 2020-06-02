@@ -76,7 +76,9 @@ const Footer = () => {
               <h6>Happiness is a clean place</h6>
             </Logo>
             <Contact>
-              <h6>+254 727 3097 02 / +254 774 592 916</h6>
+              <h6>Nairobi , Kenya</h6>
+              <h6>PO Box 62085-00200, Kenya.</h6>
+              <h6>+254 741 092 840 / +254 774 592 916</h6>
               <h6>spectacleclean@gmail.com</h6>
             </Contact>
           </FirstCont>

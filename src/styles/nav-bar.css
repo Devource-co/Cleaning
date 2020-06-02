@@ -21,15 +21,15 @@
 .nav > .nav-links {
   display: inline;
   float: right;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .nav > .nav-links > a {
   display: inline-block;
   padding: 13px 10px 13px 10px;
   text-decoration: none;
-  color: #3e3ea1;
-  font-weight: 700;
+  color: #3b3b3b;
+  font-weight: 500;
 }
 
 .nav > .nav-links > a:hover {
@@ -41,7 +41,7 @@
   display: none;
 }
 
-@media (max-width:600px) {
+@media (max-width:700px) {
   .nav {
     height: 70px;
     width: 100%;

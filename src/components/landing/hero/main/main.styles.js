@@ -3,7 +3,7 @@ import Img from'gatsby-image';
 import mq from '../../../../utils/responsiveness';
 
 export const Header = styled.header`
-  background-color: rgba(87, 255, 123, 0.1);
+  background-color: #f5f5f5;
   min-height: 400px;
   position: relative;
 `;
@@ -25,7 +25,7 @@ export const Content = styled.div`
   justify-content: space-around;
   align-items: center;
   ${mq({
-    width: ['70%', '30%', '30%', '20%']
+    width: ['70%', '50%', '40%', '20%']
   })};
   & h1 {
     ${mq({
@@ -57,7 +57,7 @@ export const BookButton = styled.button`
   background-color: #3e3ea1;
   color: #fff;
   margin-top: 2rem;
-  border-radius: 10px;
+  border-radius: 2px;
   ${mq({
     padding: ['.5rem 1rem','.7rem 2rem'],
     fontSize: ['12px', '13px', '14px', '15px'],
