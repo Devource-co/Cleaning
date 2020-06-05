@@ -7,6 +7,7 @@ import {
   AboutDetails,
   AboutVideo
 } from './about.styles';
+import aboutImage from '../../../images/about.svg';
 import Collapsable from './collapsable';
 import data from '../../../data/about.data';
 
@@ -20,9 +21,12 @@ const About = () => {
 
   return (
     <Container>
+      <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
       <ContainerInner>
+      <AboutVideo>
+        <img src={aboutImage} />
+      </AboutVideo>
         <AboutDetails>
-        <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
         <p className={css`
         padding: 1rem 0rem;
         `}>SpectacleClean was established in 2019 and has over the years evolved to become a
@@ -41,7 +45,6 @@ const About = () => {
             setCollapse={setCollapse}
             />))}
         </AboutDetails>
-        <AboutVideo></AboutVideo>
       </ContainerInner>
     </Container>
   );

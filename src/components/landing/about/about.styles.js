@@ -5,16 +5,22 @@ export const Container = styled.div`
   background-color: #fafafa;
   width: 100%;
   padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ContainerInner = styled.div`
   width: 75%;
   margin: 2rem auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   min-height: 20vh;
   ${mq({
-    width: ['90%', '85%', '80%', '75%']
+    width: ['90%', '85%', '80%', '75%'],
+    flexDirection: ['column', 'row']
   })};
 `;
 
@@ -22,10 +28,16 @@ export const AboutDetails = styled.div`
   width: 100%;
 `;
 
-export const AboutVideo = styled.div``;
+export const AboutVideo = styled.div`
+  width: 30%;
+  margin-right: 2rem;
+  & img {
+    max-height: 500px;
+  }
+`;
 
 export const BorderTitle = styled.h1`
-    text-align: left;
+    text-align: center;
     line-height: 20px;
     display: block;
     position: relative;
