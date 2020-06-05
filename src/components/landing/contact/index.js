@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { useForm } from "react-hook-form";
+import contactImage from "../../../images/contact.svg"
 import {
   Container,
   BorderTitle,
@@ -28,6 +29,7 @@ const ContactView = () => {
         <LeftConatainer>
           <h1>Let's talk about everything!</h1>
           <h6>Don't like forms? Send us an <a href="mailto:spectacleclean@gmail.com">email</a></h6>
+          <img src={contactImage} alt="contact info" />
         </LeftConatainer>
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <InputGroup>

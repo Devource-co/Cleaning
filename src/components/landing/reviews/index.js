@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactStars from 'react-stars'
 import Swiper from 'react-id-swiper';
-import 'swiper/css/swiper.min.css';
 import { Container, BorderTitle, SlideView } from './styles'
 import StyledBackground from '../../shared/backgroundImage';
 

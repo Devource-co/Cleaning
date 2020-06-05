@@ -2,13 +2,9 @@ import styled from '@emotion/styled';
 import mq from '../../../utils/responsiveness';
 
 export const Container = styled.div`
-  margin: 0 auto 0;
-  ${mq({
-    width: ['90%', '85%', '80%', '75%']
-  })};
-  padding: 1rem 0 .5rem;
-  position: relative;
-  color: white;
+  background-color: #fafafa;
+  width: 100%;
+  padding: 1rem 1rem;
 `;
 
 export const BorderTitle = styled.h1`
@@ -18,7 +14,7 @@ export const BorderTitle = styled.h1`
     position: relative;
     padding: 15px 0;
     text-transform: uppercase;
-    color: white;
+    color: #2b2b2b;
     font-weight: 700;
     margin: 2rem 0;
     align-items: flex-start;
@@ -37,9 +33,12 @@ export const BorderTitle = styled.h1`
     }
 `;
 
+
 export const SlideView = styled.div`
-    min-height: 20rem;
+    min-height: 15rem;
     height: auto;
+    width: 15rem;
+    background-color: grey;
     margin: 2rem 0 !important;
     display: flex;
     flex-direction: column;
