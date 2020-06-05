@@ -26,6 +26,15 @@ import Filter from "./Filter"
 import firebase from "../../../firebase"
 import Booking from "./Bookings"
 import Messages from "./Messages"
+import Fuse from "fuse.js"
+import {
+  Image,
+  Video,
+  Transformation,
+  CloudinaryContext,
+} from "cloudinary-react"
+import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core"
+import { fetchPhotos, openUploadWidget } from "./CloudinaryService"
 
 const responsiveStyle = content => css`
   :before {
@@ -37,43 +46,32 @@ const responsiveStyle = content => css`
   }
 `
 
-export default ({ bookingData }) => {
+export default ({ bookings, messages }) => {
   const [head, setHead] = useState(1)
   const [dropDown, setDropDown] = useState("")
   const [updateBookingData, setUpdateBookingData] = useState({})
-  const [data, setData] = useState([])
+  const [mainData, setMainData] = useState([])
   const [startDate, setStartDate] = useState(new Date())
-  const [date, setDate] = useState("")
   const [keyWord, setKeyWord] = useState("")
   const [sort, setSort] = useState("Newest")
+  const [images, setImages] = useState([])
 
+  const fuse = new Fuse(bookings, {
+    keys: ["createdAt", "name", "type", "frequency", "date", "address"],
+  })
   useEffect(() => {
-    setData(bookingData || [])
-    const dateData = data.filter(
-      item => item.createdAt === date || item.date === date
-    )
-    console.log("pppppppppppppp", keyWord)
-
-    const keyWordData = data.filter(
-      item =>
-        item.address === keyWord ||
-        item.email === keyWord ||
-        item.name === keyWord ||
-        item.estimatedBudget === keyWord ||
-        item.frequency === keyWord ||
-        item.phoneNumber === keyWord
-    )
-    console.log("pppppppppppppp", keyWordData)
+    const displayData = bookings
+    setMainData(displayData || [])
+    const data = fuse.search(keyWord)
 
     const newest = sort === "Newest" && data.length && data
     const oldest = sort === "Oldest" && data.length && data.reverse()
 
-    newest && setData(newest)
+    newest && setMainData(newest)
 
-    oldest && setData(oldest)
-    date && dateData.length && setData(dateData)
-    keyWord && keyWordData.length && setData(keyWordData)
-  }, [date, keyWord, head, bookingData, sort])
+    oldest && setMainData(oldest)
+    keyWord && data.length && setMainData(data)
+  }, [keyWord, head, bookings, sort])
 
   const activeNavColor = { color: "#4040a0", borderBottom: "2px solid #4040a0" }
   const handleClickNav = e => {
@@ -94,63 +92,90 @@ export default ({ bookingData }) => {
       }
     }
   }
-  const storeUpdatedBookingData = () => {
-    // firebase
-    //   .firestore()
-    //   .collection("client2db")
-    //   .update({bookingData[dropDown].price:updateBookingData.price})
+  const storeUpdatedBookingData = async index => {
+    const result = bookings.map((booking, i) => {
+      if (i === index) {
+        return { ...booking, ...updateBookingData }
+      }
+      return booking
+    })
+    await firebase.firestore().collection("client2db").doc("cleaning").update({
+      bookings: result,
+    })
     console.log("DATA SAVED")
   }
 
-  const handleUpdateBookingSubmit = e => {
+  const handleUpdateBookingSubmit = (e, index) => {
     e.preventDefault()
-    storeUpdatedBookingData()
-    // getUserData()
+    storeUpdatedBookingData(index)
   }
 
+  const beginUpload = tag => {
+    const uploadOptions = {
+      cloudName: "hezzie",
+      tags: [tag, "anImage"],
+      uploadPreset: "upload",
+    }
+    openUploadWidget(uploadOptions, (error, photos) => {
+      if (!error) {
+        console.log(photos)
+        if (photos.event === "success") {
+          setImages([...images, photos.info.public_id])
+        }
+      } else {
+        console.log(error)
+      }
+    })
+  }
+
+  useEffect(() => {
+    fetchPhotos("image", setImages)
+  }, [])
   return (
     <>
       <BookingHistory>
         <BookingNav>
           <button
             value={1}
-            onClick={handleClickNav}
+            onClick={() => setHead(1)}
             style={head == 1 ? activeNavColor : {}}
           >
             Bookings
           </button>
           <button
             value={2}
-            onClick={handleClickNav}
+            onClick={() => setHead(2)}
             style={head == 2 ? activeNavColor : {}}
           >
             Messages
           </button>
+          <button
+            value={3}
+            onClick={() => setHead(3)}
+            style={head == 3 ? activeNavColor : {}}
+          >
+            Gallery
+          </button>
         </BookingNav>
-        <Filter
-          setDate={i => setDate(new Date(i).toString().slice(0, 15))}
-          setKeyWord={i => setKeyWord(i)}
-          setSort={i => setSort(i)}
-          sort={sort}
-        />
-        <BookingHeader>
-          <div>Date</div>
-          {head === 1 ? (
-            <>
+        {head === 1 && (
+          <div>
+            <Filter
+              setDate={i => setKeyWord(new Date(i).toString().slice(0, 15))}
+              setKeyWord={i => setKeyWord(i)}
+              setSort={i => setSort(i)}
+              sort={sort}
+            />
+            <BookingHeader>
+              <div>Date</div>
               <div>Type</div>
               <div>Customer</div>
               <div>Frequency</div>
               <div>Address</div>
-            </>
-          ) : (
-            <>
-              <div>Email</div>
-              <div>Message</div>
-            </>
-          )}
-        </BookingHeader>
+            </BookingHeader>
+          </div>
+        )}
 
-        {data.length ? (
+        {head == 1 && bookings.length ? (
           <Pagination
             activePageStyle={{
               backgroundColor: "#3e3ea1",
@@ -160,30 +185,51 @@ export default ({ bookingData }) => {
             itemsPerPage={5}
             next="next"
             prev="prev"
-            data={data}
+            data={bookings}
             pageButtons={10}
-            onePage={(booking, index) =>
-              head == 1 ? (
-                <Booking
-                  dropDown={dropDown}
-                  setDropDown={item => setDropDown(item)}
-                  booking={booking}
-                  index={index}
-                  handleBookingInputChange={handleBookingInputChange}
-                />
-              ) : (
-                <Messages
-                  dropDown={dropDown}
-                  setDropDown={item => setDropDown(item)}
-                  booking={booking}
-                  index={index}
-                  handleBookingInputChange={handleBookingInputChange}
-                />
-              )
-            }
+            onePage={(booking, index) => (
+              <Booking
+                dropDown={dropDown}
+                setDropDown={item => setDropDown(item)}
+                booking={booking}
+                index={index}
+                handleBookingInputChange={handleBookingInputChange}
+                handleUpdateBookingSubmit={handleUpdateBookingSubmit}
+              />
+            )}
           />
         ) : (
           ""
+        )}
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {head == 2 &&
+            messages.length &&
+            messages.map((message, index) => (
+              <Messages
+                dropDown={dropDown}
+                setDropDown={item => setDropDown(item)}
+                message={message}
+                index={index}
+                handleBookingInputChange={handleBookingInputChange}
+              />
+            ))}
+        </div>
+        {head === 3 && (
+          <CloudinaryContext cloudName="hezzie">
+            <div className="App">
+              <button onClick={() => beginUpload("image")}>Upload Image</button>
+              <section>
+                {images.map(i => (
+                  <Image
+                    key={i}
+                    publicId={i}
+                    fetch-format="auto"
+                    quality="auto"
+                  />
+                ))}
+              </section>
+            </div>
+          </CloudinaryContext>
         )}
       </BookingHistory>
     </>

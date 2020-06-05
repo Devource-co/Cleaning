@@ -159,7 +159,7 @@ export const DropDown = styled.div`
 
   display: flex;
   flex-direction: row;
-  :nth-child(2n + 2) {
+  > :nth-child(2n + 2) {
     background: #fff;
   }
   div {
@@ -221,4 +221,41 @@ export const VerticalLine = styled.div`
   border-radius: 0px !important;
   width: 0px !important;
   padding: 0px !important;
+`
+
+export const MessageContainer = styled.div`
+  width: unset;
+  width: 30.33% !important;
+  display: unset;
+  margin: unset;
+  margin: 5px !important;
+
+  .container {
+    display: unset;
+    margin: unset;
+    border: solid 1px #edefee;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2%;
+    div {
+      background: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px;
+    }
+    > p {
+      width: 100%;
+      padding: 10px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      background: #fff;
+    }
+  }
 `

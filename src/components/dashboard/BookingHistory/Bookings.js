@@ -58,6 +58,7 @@ export default ({
   setDropDown,
   index,
   handleBookingInputChange,
+  handleUpdateBookingSubmit,
 }) => {
   return (
     <>
@@ -130,7 +131,9 @@ export default ({
               type="text"
               placeholder="Enter the price"
             />
-            <SubmitButton>Update</SubmitButton>
+            <SubmitButton onClick={e => handleUpdateBookingSubmit(e, index)}>
+              Update
+            </SubmitButton>
           </UpdateContainer>
         </DropDown>
       )}

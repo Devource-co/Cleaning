@@ -5,6 +5,7 @@ import {
   DropDown,
   UpdateContainer,
   Details,
+  MessageContainer,
 } from "./BookingHistory.styles"
 import {
   BookingLabel,
@@ -45,7 +46,7 @@ const statusOptions = [
 ]
 
 export default ({
-  booking,
+  message,
   dropDown,
   setDropDown,
   index,
@@ -53,17 +54,24 @@ export default ({
 }) => {
   return (
     <>
-      <BookingContainer
+      <MessageContainer
         key={index}
         onClick={() => {
           dropDown === index ? setDropDown("") : setDropDown(index)
         }}
         className="boooking"
       >
-        <div className={responsiveStyle("Frequency")}>{booking.date}</div>
-        <div className={responsiveStyle("Address")}>{booking.address}</div>
-        <div className={responsiveStyle("Address")}>{booking.address}</div>
-      </BookingContainer>
+        <div className="container">
+          <div>
+            <p>{message.createdAt}</p>
+            <h5>{message.name}</h5>
+          </div>
+          <p>{message.message}</p>
+
+          <p>{message.email}</p>
+          <h5>{message.phoneNumber}</h5>
+        </div>
+      </MessageContainer>
     </>
   )
 }

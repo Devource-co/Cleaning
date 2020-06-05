@@ -17,11 +17,13 @@ body {
 .pagination-buttons {
   border: solid 1px #c6c6ca;
   margin: 10px 0px;
-  display: inline-flex;
+  display: flex;
+  width: unset;
   flex-direction: row;
   white-space: nowrap;
   width: 1px !important;
   text-align: center;
+  width: fit-content;
 }
 .arrows {
   border: solid 1px #c6c6ca;
@@ -30,7 +32,14 @@ body {
 }
 .arrows:hover {
   background: #4040a0ea !important;
+  border: solid 1px #4040a0ea;
+
   color: #fff;
+}
+.pagination-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
 }
 .arrows button {
   /* width: 70px !important; */

@@ -4,14 +4,14 @@ import "react-toastify/dist/ReactToastify.css"
 import NewBookings from "./NewBookings"
 
 import Quotes from "./Quotes"
-export default ({ bookingData }) => {
+export default ({ bookings }) => {
   return (
     <>
       <GraphContainer>
         <div className="grapgh">
-          <NewBookings bookingData={bookingData} />
+          <NewBookings bookings={bookings} />
         </div>
-        <Quotes />
+        <Quotes bookings={bookings} />
       </GraphContainer>
     </>
   )

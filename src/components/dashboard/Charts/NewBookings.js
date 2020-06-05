@@ -4,22 +4,24 @@ import { chartOptions, chartData } from "./newBookingsOptions"
 import { Chart, H1 } from "./main.styles"
 import getCountsPerDay, { daylist } from "./getountsPerDay"
 
-export default bookingData => {
+export default ({ bookings }) => {
   const deepCleaning =
-    bookingData.bookingData &&
-    bookingData.bookingData.filter(item => {
+    bookings &&
+    bookings.filter(item => {
       return item.type.value === "deep"
     })
   const carpetCleaning =
-    bookingData.bookingData &&
-    bookingData.bookingData.filter(item => {
+    bookings &&
+    bookings.filter(item => {
       return item.type.value === "move in/ move out"
     })
   const standardCleaning =
-    bookingData.bookingData &&
-    bookingData.bookingData.filter(item => {
+    bookings &&
+    bookings.filter(item => {
       return item.type.value === "standard"
     })
+
+
   const data = chartData(
     daylist,
     getCountsPerDay(deepCleaning || []),

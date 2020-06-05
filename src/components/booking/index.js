@@ -12,7 +12,7 @@ import {
 import Select from "react-select"
 import NavBar from "../shared/Header"
 import { useImageQuery } from "../../hooks/useImagesQuery"
-import firebase, { writeUserData } from "../../firebase"
+import firebase, { writeFirestore } from "../../firebase"
 import Img from "gatsby-image"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -42,7 +42,7 @@ export default () => {
   const [startDate, setStartDate] = useState(new Date())
 
   useEffect(() => {
-    getUserData()
+    getFirestoreData()
   }, [])
   const handleSigninInputChange = e => {
     if (e.target) {
@@ -59,7 +59,7 @@ export default () => {
     }
   }
 
-  const getUserData = async () => {
+  const getFirestoreData = async () => {
     await firebase
       .firestore()
       .collection("client2db")
@@ -69,20 +69,25 @@ export default () => {
         setBookingData(result)
       })
   }
-  const writeUserData = () => {
-    firebase
+
+  const writeFirestore = async () => {
+    await firebase
       .firestore()
       .collection("client2db")
-      .add({ ...signInData, createdAt: startDate.toDateString() })
-    console.log("DATA SAVED")
+      .doc("cleaning")
+      .update({
+        bookings: [
+          ...bookingData[0].bookings,
+          { ...signInData, createdAt: startDate.toDateString() },
+        ],
+      })
   }
 
-  const handleSigninSubmit = e => {
+  const handleBookingSubmit = e => {
     e.preventDefault()
-    console.log("pppPPPPPPPP", signInData, bookingData)
 
-    writeUserData()
-    getUserData()
+    writeFirestore()
+    getFirestoreData()
   }
 
   const { logo } = useImageQuery()
@@ -90,7 +95,7 @@ export default () => {
     <>
       <NavBar />
       <Container>
-        <BookingForm onSubmit={handleSigninSubmit}>
+        <BookingForm onSubmit={handleBookingSubmit}>
           <H1
             className={css`
               margin-bottom: 50px;
@@ -243,7 +248,7 @@ export default () => {
               />
             </div>
           </InputRow>
-          <SubmitButton type="button" onClick={handleSigninSubmit}>
+          <SubmitButton type="button" onClick={handleBookingSubmit}>
             Submit
           </SubmitButton>
         </BookingForm>
