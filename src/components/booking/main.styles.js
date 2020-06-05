@@ -13,7 +13,7 @@ export const Header = styled.header`
 
 export const Container = styled.div`
   color: #25252a;
-  background-color: #edefee;
+  background-color: #fff;
   position: absolute;
   min-height: 100%;
   padding-bottom: 70px;

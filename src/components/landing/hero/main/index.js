@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { Header, Container, Content, Image, BookButton } from './main.styles';
 import NavBar from '../navbar';
-import { useImageQuery } from '../../../../hooks/useImagesQuery';
+import heroImage from '../../../../images/try.svg';
 
 export default () => {
-  const { cleaner } = useImageQuery()
   return (
     <Header>
       <NavBar />
@@ -16,7 +15,7 @@ export default () => {
           <Link to="/booking"><BookButton>Book Now</BookButton></Link>
         </Content>
         <div>
-          <Image fluid={cleaner.childImageSharp.fluid} />
+          <Image src={heroImage} />
         </div>
       </Container>
     </Header>

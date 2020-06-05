@@ -7,6 +7,7 @@ import {
   AboutDetails,
   AboutVideo
 } from './about.styles';
+import aboutImage from '../../../images/about.svg';
 import Collapsable from './collapsable';
 import data from '../../../data/about.data';
 
@@ -20,12 +21,19 @@ const About = () => {
 
   return (
     <Container>
+      <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
       <ContainerInner>
+      <AboutVideo>
+        <img src={aboutImage} />
+      </AboutVideo>
         <AboutDetails>
-        <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
         <p className={css`
         padding: 1rem 0rem;
-        `}>Choose our cleaners and they will do wonders to your offices or homes. here below are our abouts:</p>
+        `}>SpectacleClean was established in 2019 and has over the years evolved to become a
+        specialized cleaning and fumigation service provider in Kenya. It is one of the wholly citizen owned commercial
+         and domestic cleaning and fumigation establishment in Kenya currently. SpectacleClean and Fumigation
+         services has extensive experience in cleaning and fumigation of all kinds of related properties such as
+         schools, industrial buildings, hotels, shopping malls, governemnt and private offices, hospitals, banks and more.</p>
           {data.map(({index, title, content}) => (
           <Collapsable 
             index={index}
@@ -37,7 +45,6 @@ const About = () => {
             setCollapse={setCollapse}
             />))}
         </AboutDetails>
-        <AboutVideo></AboutVideo>
       </ContainerInner>
     </Container>
   );
