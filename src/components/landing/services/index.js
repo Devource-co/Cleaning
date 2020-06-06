@@ -14,7 +14,7 @@ import data from '../../../data/services.data';
 const ServicesView = () => {
   return (
     <Container>
-      <BorderTitle>Our Services</BorderTitle>
+      <BorderTitle id="services">Our Services</BorderTitle>
       <ListServices>
         {data.map(({ index, title, content, description, icon }) => (
         <ServiceItem

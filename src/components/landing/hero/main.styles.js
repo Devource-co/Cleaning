@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import mq from '../../../../utils/responsiveness';
+import mq from '../../../utils/responsiveness';
 
 export const Header = styled.header`
   background-color: #e7eff2;

@@ -9,7 +9,7 @@ import {
   Container,
 } from "./main.styles"
 import Select from "react-select"
-import NavBar from "../shared/navBar"
+import NavBar from "../shared/Header"
 import { useImageQuery } from "../../hooks/useImagesQuery"
 import firebase, { writeUserData } from "../../firebase"
 import Img from "gatsby-image"

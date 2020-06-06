@@ -22,7 +22,7 @@ const GalleryView = () => {
   }
   return (
     <Container>
-      <BorderTitle>Gallery</BorderTitle>
+      <BorderTitle id="gallery">Gallery</BorderTitle>
       <Swiper {...params}>
         <SlideView  />
         <SlideView  />

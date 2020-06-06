@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Container } from "./main.styles"
-import NavBar from "../shared/navBar"
+import NavBar from "../shared/Header"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import GraphContainer from "./Charts"
