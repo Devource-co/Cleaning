@@ -16,11 +16,10 @@ const About = () => {
     index: 1,
   });
 
-  console.log(collapse);
   const toggle = index => setCollapse(state => ({ ...state, index: state.index === index ? null : index}));
 
   return (
-    <Container>
+    <Container id="about">
       <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
       <ContainerInner>
       <AboutVideo>

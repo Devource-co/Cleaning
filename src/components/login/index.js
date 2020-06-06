@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { LoginInput, SubmitButton, H1, LoginLabel } from "./main.styles"
 import { Form, Header, Container } from "../styles/shared"
-import NavBar from "../shared/navBar"
+import NavBar from "../shared/Header"
 import { useImageQuery } from "../../hooks/useImagesQuery"
 import { signInUser } from "../../firebase"
 import Img from "gatsby-image"

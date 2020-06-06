@@ -25,15 +25,16 @@ export const ContainerInner = styled.div`
 `;
 
 export const AboutDetails = styled.div`
-  width: 100%;
+${mq({
+  width: ['90%', '60%'],
+})};
 `;
 
 export const AboutVideo = styled.div`
-  width: 30%;
-  margin-right: 2rem;
-  & img {
-    max-height: 500px;
-  }
+${mq({
+  width: ['70%', '40%'],
+  marginRight: ['0', '2rem']
+})};
 `;
 
 export const BorderTitle = styled.h1`

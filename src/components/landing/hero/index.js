@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { Header, Container, Content, Image, BookButton } from './main.styles';
-import NavBar from '../navbar';
-import heroImage from '../../../../images/try.svg';
+import NavBar from '../../shared/Header';
+import heroImage from '../../../images/try.svg';
 
 export default () => {
   return (

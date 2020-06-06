@@ -24,7 +24,7 @@ const ContactView = () => {
 
   return (
     <Container>
-      <BorderTitle>Contact Us</BorderTitle>
+      <BorderTitle id="contact">Contact Us</BorderTitle>
       <ContainerInner>
         <LeftConatainer>
           <h1>Let's talk about everything!</h1>
