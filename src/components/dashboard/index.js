@@ -25,8 +25,8 @@ export default () => {
   }, [])
   return (
     <>
+      <NavBar />
       <Container>
-        <NavBar />
         <GraphContainer bookingData={bookingData} />
         <BookingHistory bookingData={bookingData} />
         <ToastContainer />

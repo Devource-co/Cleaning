@@ -1,12 +1,12 @@
 const data = [{
-  index: 2,
+  index: 1,
   title: 'Our Vision',
-  content: `Is to be recognized as the most respected proffessional cleaning and fumigation service provider in Kenya \
+  content: `To be recognized as the most respected proffessional cleaning and fumigation service provider in Kenya \
   and to match the current standards of cleaning and fumigation in the market solely to promote \
   hygiene and create enough employment opportunity to the unemployed.
   `
 }, {
-  index: 3,
+  index: 2,
   title: 'Our Mission',
   content: ` To encourage close  and everlasting relationships with our customers, therefore \
   building their trust and confidence. \n

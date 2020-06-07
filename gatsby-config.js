@@ -38,6 +38,12 @@ module.exports = {
         "cssPropOptimization": true
       },
     },
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#00c400`,
+        showSpinner: true,
+      },
+    },
   ],
 }

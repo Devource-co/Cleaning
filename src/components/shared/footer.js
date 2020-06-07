@@ -39,14 +39,14 @@ const Logo = styled.div`
   })};
 }
   & h6 {
-    font-size: 12px;
+    font-size: 14px;
     color: #00c400;
   }
 `;
 
 const Contact = styled.div`
   margin: 1rem 0;
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 const SecondCont = styled.div`
@@ -90,7 +90,6 @@ const Footer = () => {
         </Section>
         <Section>
           <FootEl>&copy;{new Date().getFullYear()} SpectacleClean. All rights Reserved</FootEl>
-          {/* <FootEl> Made with  <span role="img">💜</span>{" "}bon</FootEl> */}
           <FootEl>Terms of service | Privacy Policy</FootEl>
         </Section>
       </Container>

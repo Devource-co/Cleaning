@@ -75,18 +75,7 @@ export default () => {
               activeClassName="text-blue-600"
               className="block md:inline-block md:pl-8 px-2 py-3 no-underline md:hover:underline text-gray-800 hover:text-blue-600 font-semibold"
             >
-              Booking
-            </Link>
-          </li>
-
-          <li className="border-t md:border-none">
-            <Link
-              onClick={() => setChecked(!checked)}
-              to="/login"
-              activeClassName="text-green-600"
-              className="block md:inline-block px-2 py-3 no-underline md:hover:underline text-green-700 hover:text-green-400 font-semibold"
-            >
-              For Staff
+              Book Now
             </Link>
           </li>
         </ul>

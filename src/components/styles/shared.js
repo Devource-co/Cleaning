@@ -16,7 +16,6 @@ ${mq({
 })};
 `
 export const Header = styled.header`
-  background-color: rgba(87, 255, 123, 0.1);
   min-height: 100%;
   position: absolute;
   width: 100%;

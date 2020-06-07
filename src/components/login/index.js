@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { LoginInput, SubmitButton, H1, LoginLabel } from "./main.styles"
+import { LoginInput, SubmitButton, H1, LoginLabel, TextInput, InputGroup } from "./main.styles"
 import { Form, Header, Container } from "../styles/shared"
 import NavBar from "../shared/Header"
 import { useImageQuery } from "../../hooks/useImagesQuery"
@@ -30,22 +30,36 @@ export default () => {
         <Container>
           <Form onSubmit={handleSigninSubmit}>
             <H1>Sign in</H1>
-            <LoginLabel htmlFor="email">email</LoginLabel>
-            <LoginInput
-              id="email"
-              name="email"
-              onChange={handleSigninInputChange}
-              type="email"
-              placeholder="Email"
-            />
-            <LoginLabel htmlFor="password">password</LoginLabel>
-            <LoginInput
-              id="password"
-              name="password"
-              onChange={handleSigninInputChange}
-              type="password"
-              placeholder="Password"
-            />
+            <InputGroup>
+              <LoginLabel htmlFor="email">email</LoginLabel>
+              <TextInput>
+                <LoginInput
+                  id="email"
+                  name="email"
+                  onChange={handleSigninInputChange}
+                  type="email"
+                  placeholder="Email"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
+            </InputGroup>
+            <InputGroup>
+              <LoginLabel htmlFor="password">password</LoginLabel>
+              <TextInput>
+                <LoginInput
+                  id="password"
+                  name="password"
+                  onChange={handleSigninInputChange}
+                  type="password"
+                  placeholder="Password"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
+            </InputGroup>
             <SubmitButton type="button" onClick={handleSigninSubmit}>
               Submit
             </SubmitButton>

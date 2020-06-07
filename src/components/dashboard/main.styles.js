@@ -4,7 +4,6 @@ import mq from "../../utils/responsiveness"
 
 export const Container = styled.div`
   color: #25252a;
-  background-color: #edefee;
   position: absolute;
   min-height: 90%;
   padding-bottom: 70px;

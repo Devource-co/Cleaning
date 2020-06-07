@@ -7,6 +7,7 @@ import {
   BookingForm,
   InputRow,
   Container,
+  TextInput,
 } from "./main.styles"
 import Select from "react-select"
 import NavBar from "../shared/Header"
@@ -94,8 +95,8 @@ export default () => {
   const { logo } = useImageQuery()
   return (
     <>
+      <NavBar />
       <Container>
-        <NavBar />
         <BookingForm onSubmit={handleSigninSubmit}>
           <H1
             className={css`
@@ -107,47 +108,67 @@ export default () => {
           <InputRow>
             <div className="row">
               <BookingLabel htmlFor="name">Full name</BookingLabel>
-              <BookingInput
-                id="name"
-                name="name"
-                onChange={handleSigninInputChange}
-                type="text"
-                placeholder="Enter your full name"
-              />
+              <TextInput>
+                <BookingInput
+                  id="name"
+                  name="name"
+                  onChange={handleSigninInputChange}
+                  type="text"
+                  placeholder="Enter your full name"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
             </div>
             <div className="row">
               <BookingLabel htmlFor="email">email</BookingLabel>
-              <BookingInput
-                id="email"
-                name="email"
-                onChange={handleSigninInputChange}
-                type="email"
-                placeholder="Enter your email"
-              />
+              <TextInput>
+                <BookingInput
+                  id="email"
+                  name="email"
+                  onChange={handleSigninInputChange}
+                  type="email"
+                  placeholder="Enter your email"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
             </div>
           </InputRow>
           <InputRow>
             <div className="row">
               <BookingLabel htmlFor="phoneNumber">Phone number</BookingLabel>
-              <BookingInput
-                id="phoneNumber"
-                name="phoneNumber"
-                onChange={handleSigninInputChange}
-                type="text"
-                placeholder="Enter your Phone number"
-              />
+              <TextInput>
+                <BookingInput
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  onChange={handleSigninInputChange}
+                  type="text"
+                  placeholder="Enter your Phone number"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
             </div>
             <div className="row">
               <BookingLabel htmlFor="estimatedBudget">
                 Estimated budget
               </BookingLabel>
-              <BookingInput
-                id="estimatedBudget"
-                name="estimatedBudget"
-                onChange={handleSigninInputChange}
-                type="estimatedBudget"
-                placeholder="Enter your estimated budget"
-              />
+              <TextInput>
+                <BookingInput
+                  id="estimatedBudget"
+                  name="estimatedBudget"
+                  onChange={handleSigninInputChange}
+                  type="estimatedBudget"
+                  placeholder="Enter your estimated budget"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
             </div>
           </InputRow>
 
@@ -181,13 +202,18 @@ export default () => {
           <InputRow>
             <div className="row">
               <BookingLabel htmlFor="name">Address</BookingLabel>
-              <BookingInput
-                id="address"
-                name="address"
-                onChange={handleSigninInputChange}
-                type="text"
-                placeholder="Enter your address"
-              />
+              <TextInput>
+                <BookingInput
+                  id="address"
+                  name="address"
+                  onChange={handleSigninInputChange}
+                  type="text"
+                  placeholder="Enter your address"
+                />
+                <span className="focus-border">
+                  <i></i>
+                </span>
+              </TextInput>
             </div>
             <div className="row">
               <BookingLabel htmlFor="date">Date</BookingLabel>

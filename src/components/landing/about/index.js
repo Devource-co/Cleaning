@@ -28,7 +28,7 @@ const About = () => {
         <AboutDetails>
         <p className={css`
         padding: 1rem 0rem;
-        `}>SpectacleClean was established in 2019 and has over the years evolved to become a
+        `}>SpectacleClean was established in 2019 and it has over the years evolved to become a
         specialized cleaning and fumigation service provider in Kenya. It is one of the wholly citizen owned commercial
          and domestic cleaning and fumigation establishment in Kenya currently. SpectacleClean and Fumigation
          services has extensive experience in cleaning and fumigation of all kinds of related properties such as
