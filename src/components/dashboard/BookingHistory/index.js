@@ -35,7 +35,7 @@ import {
 } from "cloudinary-react"
 import { Cloudinary as CoreCloudinary, Util } from "cloudinary-core"
 import { fetchPhotos, openUploadWidget } from "./CloudinaryService"
-
+import Gallery from "./Gallery"
 const responsiveStyle = content => css`
   :before {
     content: "${content}";
@@ -46,7 +46,7 @@ const responsiveStyle = content => css`
   }
 `
 
-export default ({ bookings, messages }) => {
+export default ({ bookings, messages, gallery }) => {
   const [head, setHead] = useState(1)
   const [dropDown, setDropDown] = useState("")
   const [updateBookingData, setUpdateBookingData] = useState({})
@@ -109,28 +109,6 @@ export default ({ bookings, messages }) => {
     e.preventDefault()
     storeUpdatedBookingData(index)
   }
-
-  const beginUpload = tag => {
-    const uploadOptions = {
-      cloudName: "hezzie",
-      tags: [tag, "anImage"],
-      uploadPreset: "upload",
-    }
-    openUploadWidget(uploadOptions, (error, photos) => {
-      if (!error) {
-        console.log(photos)
-        if (photos.event === "success") {
-          setImages([...images, photos.info.public_id])
-        }
-      } else {
-        console.log(error)
-      }
-    })
-  }
-
-  useEffect(() => {
-    fetchPhotos("image", setImages)
-  }, [])
   return (
     <>
       <BookingHistory>
@@ -214,23 +192,7 @@ export default ({ bookings, messages }) => {
               />
             ))}
         </div>
-        {head === 3 && (
-          <CloudinaryContext cloudName="hezzie">
-            <div className="App">
-              <button onClick={() => beginUpload("image")}>Upload Image</button>
-              <section>
-                {images.map(i => (
-                  <Image
-                    key={i}
-                    publicId={i}
-                    fetch-format="auto"
-                    quality="auto"
-                  />
-                ))}
-              </section>
-            </div>
-          </CloudinaryContext>
-        )}
+        {head === 3 && <Gallery gallery={gallery ? gallery : []} />}
       </BookingHistory>
     </>
   )

@@ -28,12 +28,10 @@ export const getUserData = setBookingData => {
 }
 export const signInUser = async data => {
   try {
-    console.log(data)
-
     const result = await firebase
       .auth()
       .signInWithEmailAndPassword(data.email, data.password)
-    console.log(result)
+    localStorage.setItem("token", result.user.refreshToken)
     toast("success", "Successfully  logged in")
     return result
   } catch (error) {

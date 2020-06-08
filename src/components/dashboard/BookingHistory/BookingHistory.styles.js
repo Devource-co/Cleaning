@@ -228,7 +228,7 @@ export const MessageContainer = styled.div`
   width: 30.33% !important;
   display: unset;
   margin: unset;
-  margin: 5px !important;
+  margin: 5px auto;
 
   .container {
     display: unset;
@@ -256,6 +256,34 @@ export const MessageContainer = styled.div`
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       background: #fff;
+    }
+  }
+`
+export const Gallery = styled.section`
+  width: 100%;
+  margin: auto;
+  button {
+    background: #3e3ea1;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+  }
+  > section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 100%;
+    div {
+      width: 200px;
+      height: 200px;
+      margin: 15px auto;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
     }
   }
 `
