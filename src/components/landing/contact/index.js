@@ -3,7 +3,6 @@ import { css } from "emotion"
 import { useForm } from "react-hook-form"
 import contactImage from "../../../images/contact.svg"
 import firebase from "../../../firebase"
-
 import {
   Container,
   BorderTitle,
@@ -44,7 +43,6 @@ const ContactView = () => {
       }
     }
   }
-  console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP", contactData)
 
   const getFirestoreData = async () => {
     await firebase

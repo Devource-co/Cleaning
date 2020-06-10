@@ -52,14 +52,15 @@ export const SlideView = styled.div`
     margin: 0 auto;
   }
 `
-export const AddReviewpOPuP = styled.button`
+export const AddReviewpOPuP = styled.div`
   all: unset;
   top: 0;
   bottom: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  height: 85%;
+  height: auto;
+  overflow: auto;
   margin: auto;
   position: absolute;
   background: #4e4e53 !important;
