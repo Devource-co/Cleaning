@@ -1,14 +1,32 @@
-import { Bar } from "react-chartjs-2"
+import { Line } from "react-chartjs-2"
 import React from "react"
-import { css } from "emotion"
-import { chartOptions, chartData } from "./chartHelper"
-import { Chart, H2, H1 } from "./main.styles"
-export default ({ chartLabels, reads, messages, failledSearches }) => {
+import { chartOptions, chartData } from "./newBookingsOptions"
+import { Chart, H1 } from "./main.styles"
+import getCountsPerDay, { daylist } from "./getountsPerDay"
+
+export default ({ bookings }) => {
+  const deepCleaning =
+    bookings &&
+    bookings.filter(item => {
+      return item.type.value === "deep"
+    })
+  const carpetCleaning =
+    bookings &&
+    bookings.filter(item => {
+      return item.type.value === "move in/ move out"
+    })
+  const standardCleaning =
+    bookings &&
+    bookings.filter(item => {
+      return item.type.value === "standard"
+    })
+
+
   const data = chartData(
-    [1, 2, 3, 4, 5, 5, 6],
-    [1, 1, 22, 34, 45, 5, 6],
-    [1, 2, 31, 41, 5, 5, 6],
-    [1, 2, 3, 4, 5, 5, 6]
+    daylist,
+    getCountsPerDay(deepCleaning || []),
+    getCountsPerDay(carpetCleaning || []),
+    getCountsPerDay(standardCleaning || [])
   )
   const setGradientColor = (canvas, color) => {
     const ctx = canvas.getContext("2d")
@@ -19,11 +37,10 @@ export default ({ chartLabels, reads, messages, failledSearches }) => {
 
   const getChartData = canvas => {
     if (data.datasets) {
-      const colors = ["#4040a0ea", "#05D305", "transparent"]
+      const colors = ["#4040a0ea", "#05D305", "#fc60a8"]
       data.datasets.forEach((set, i) => {
-        set.backgroundColor = setGradientColor(canvas, colors[i])
-        set.borderColor =
-          colors[i] === "transparent" ? "#fc60a8" : "transparent"
+        set.backgroundColor = setGradientColor(canvas, "transparent")
+        set.borderColor = colors[i]
         set.borderWidth = 2
         set.lineWidth = 0
         set.pointRadius = 0
@@ -41,7 +58,7 @@ export default ({ chartLabels, reads, messages, failledSearches }) => {
           height: "85%",
         }}
       >
-        <Bar options={chartOptions} data={getChartData} />
+        <Line options={chartOptions} data={getChartData} />
       </div>
     </Chart>
   )

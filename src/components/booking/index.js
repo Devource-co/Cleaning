@@ -12,7 +12,7 @@ import {
 import Select from "react-select"
 import NavBar from "../shared/Header"
 import { useImageQuery } from "../../hooks/useImagesQuery"
-import firebase, { writeUserData } from "../../firebase"
+import firebase, { writeFirestore } from "../../firebase"
 import Img from "gatsby-image"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -42,31 +42,24 @@ export default () => {
   const [startDate, setStartDate] = useState(new Date())
 
   useEffect(() => {
-    getUserData()
+    getFirestoreData()
   }, [])
   const handleSigninInputChange = e => {
     if (e.target) {
-      console.log("==========jjj==========", e)
-
       e.preventDefault()
       const { name, value } = e.target
       setSignInData({ ...signInData, [name]: value })
     } else {
-      console.log("=======lll=============", e)
-
       if (e.name) {
-        console.log("========fdkjghkjdfhjghdfj============", e)
         const { label, value, name } = e
         setSignInData({ ...signInData, [name]: label })
       } else {
         setSignInData({ ...signInData, [e[0].name]: e })
-        console.log("======mm==============", signInData, e)
       }
     }
   }
-  console.log("======mm==============", signInData)
 
-  const getUserData = async () => {
+  const getFirestoreData = async () => {
     await firebase
       .firestore()
       .collection("client2db")
@@ -76,20 +69,25 @@ export default () => {
         setBookingData(result)
       })
   }
-  const writeUserData = () => {
-    firebase
+
+  const writeFirestore = async () => {
+    await firebase
       .firestore()
       .collection("client2db")
-      .add({ ...signInData, createdAt: startDate.toDateString() })
-    console.log("DATA SAVED")
+      .doc("cleaning")
+      .update({
+        bookings: [
+          ...bookingData[0].bookings,
+          { ...signInData, createdAt: startDate.toDateString() },
+        ],
+      })
   }
 
-  const handleSigninSubmit = e => {
+  const handleBookingSubmit = e => {
     e.preventDefault()
-    console.log("pppPPPPPPPP", signInData, bookingData)
 
-    writeUserData()
-    getUserData()
+    writeFirestore()
+    getFirestoreData()
   }
 
   const { logo } = useImageQuery()
@@ -97,7 +95,7 @@ export default () => {
     <>
       <NavBar />
       <Container>
-        <BookingForm onSubmit={handleSigninSubmit}>
+        <BookingForm onSubmit={handleBookingSubmit}>
           <H1
             className={css`
               margin-bottom: 50px;
@@ -183,7 +181,7 @@ export default () => {
                 onChange={e =>
                   handleSigninInputChange({
                     name: e.name,
-                    label: { label: e.label },
+                    label: { label: e.label, value: e.value },
                   })
                 }
               />
@@ -232,7 +230,7 @@ export default () => {
           </InputRow>
           <InputRow>
             <div style={{ width: "100%" }}>
-              <BookingLabel htmlFor="name">Additional information</BookingLabel>
+              <BookingLabel htmlFor="info">Additional information</BookingLabel>
               <textarea
                 style={{
                   width: "100%",
@@ -241,8 +239,8 @@ export default () => {
                   border: "solid 1px #c6c6ca",
                   marginBottom: "20px",
                 }}
-                id="address"
-                name="address"
+                id="info"
+                name="info"
                 onChange={handleSigninInputChange}
                 type="text"
                 placeholder="Enter additional information"
@@ -250,7 +248,7 @@ export default () => {
               />
             </div>
           </InputRow>
-          <SubmitButton type="button" onClick={handleSigninSubmit}>
+          <SubmitButton type="button" onClick={handleBookingSubmit}>
             Submit
           </SubmitButton>
         </BookingForm>

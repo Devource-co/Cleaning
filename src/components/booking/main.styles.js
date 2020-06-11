@@ -143,7 +143,7 @@ export const BookingInput = styled.input`
 `
 
 export const H1 = styled.h1`
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
   font-weight: 600;
   color: #4040a0;
@@ -154,9 +154,9 @@ export const SubmitButton = styled.button`
   margin: 0px auto;
   border-radius: 20px;
   text-align: center;
-  padding: 10px 30px;
+  padding: 6px 30px;
   font-size: 15px;
-  font-weight:600;
+  font-weight: 600;
   pointer: cursor !important;
   outline: none;
   border: none;

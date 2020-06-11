@@ -8,7 +8,7 @@ import BookingHistory from "./BookingHistory"
 import firebase from "../../firebase"
 
 export default () => {
-  const [bookingData, setBookingData] = useState([])
+  const [data, setData] = useState([])
   const getUserData = async () => {
     await firebase
       .firestore()
@@ -16,7 +16,8 @@ export default () => {
       .get()
       .then(querySnapshot => {
         const result = querySnapshot.docs.map(doc => doc.data())
-        setBookingData(result)
+
+        setData(result)
       })
   }
 
@@ -27,8 +28,16 @@ export default () => {
     <>
       <NavBar />
       <Container>
-        <GraphContainer bookingData={bookingData} />
-        <BookingHistory bookingData={bookingData} />
+        <GraphContainer
+          bookings={data.length && data[0].bookings}
+          gallery={data.length && data[0].gallery}
+          messages={data.length && data[0].messages}
+        />
+        <BookingHistory
+          bookings={data.length && data[0].bookings}
+          gallery={data.length && data[0].gallery}
+          messages={data.length && data[0].messages}
+        />
         <ToastContainer />
       </Container>
     </>

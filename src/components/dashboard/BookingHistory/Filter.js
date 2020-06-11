@@ -9,10 +9,10 @@ import {
   SearchContainer,
 } from "./BookingHistory.styles"
 
-export default () => {
+export default ({ setDate, setSort, sort, setKeyWord }) => {
   const [head, setHead] = useState(1)
-  const [sort, setSort] = useState("Newest")
   const [sortPopUp, setSortPopUp] = useState(false)
+
   const activeNavColor = { background: "#4040a0", color: "#fff" }
   const handleClickNav = e => {
     e.preventDefault()
@@ -91,10 +91,17 @@ export default () => {
           </CategoryContainer>
           <SearchContainer>
             <div>
-              <SearchInput placeholder="Search" type="text" />
+              <SearchInput
+                onChange={e => setKeyWord(e.target.value)}
+                placeholder="Search"
+                type="text"
+              />
             </div>
             <div>
-              <SearchInput type="date" />
+              <SearchInput
+                type="date"
+                onChange={e => setDate(e.target.value)}
+              />
             </div>
           </SearchContainer>
         </SearchFilter>
