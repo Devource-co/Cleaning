@@ -1,6 +1,7 @@
 import React from 'react'
 import Swiper from 'react-id-swiper';
 import { Container, BorderTitle, SlideView  } from './styles';
+import Typography from '@material-ui/core/Typography';
 
 const GalleryView = () => {
   const params = {
@@ -23,6 +24,7 @@ const GalleryView = () => {
   return (
     <Container>
       <BorderTitle id="gallery">Gallery</BorderTitle>
+      <Typography style={{ textAlign: "center"}}>Swipe through the gallery to view our work.</Typography>
       <Swiper {...params}>
         <SlideView  />
         <SlideView  />

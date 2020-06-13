@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Confirm({ formData }) {
+function Confirm({ formData,error }) {
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
-      <Typography>Please confirm your details below before submitting.</Typography>
+      {error ? <Typography style={{ color: "#ff08ce" }}>Please make sure you fill all the fields.</Typography>:<Typography>Please confirm your details below before submitting.</Typography>}
       <div>
         <Typography variant="h6">Name: </Typography> <Typography>{ formData.name || "------" }</Typography>
       </div>
