@@ -27,7 +27,7 @@ const About = () => {
       <BorderTitle>ABOUT OUR COMPANY</BorderTitle>
       <ContainerInner>
         <AboutVideo>
-          <img src={aboutImage} />
+          <img src={aboutImage} alt="vector two cleaners" />
         </AboutVideo>
         <AboutDetails>
           <p

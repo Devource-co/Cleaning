@@ -9,15 +9,16 @@ import {
   Container,
   TextInput,
 } from "./main.styles"
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Select from "react-select"
 import NavBar from "../shared/Header"
 import { useImageQuery } from "../../hooks/useImagesQuery"
-import firebase, { writeFirestore } from "../../firebase"
-import Img from "gatsby-image"
+import firebase from "../../firebase"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
 import { css } from "emotion"
 
 const typeOptions = [
@@ -39,7 +40,7 @@ const frequencyOptions = [
 export default () => {
   const [signInData, setSignInData] = useState({})
   const [bookingData, setBookingData] = useState([])
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate ] = useState(new Date())
 
   useEffect(() => {
     getFirestoreData()
@@ -199,37 +200,34 @@ export default () => {
           </InputRow>
           <InputRow>
             <div className="row">
-              <BookingLabel htmlFor="name">Address</BookingLabel>
-              <TextInput>
-                <BookingInput
-                  id="address"
-                  name="address"
-                  onChange={handleSigninInputChange}
-                  type="text"
-                  placeholder="Enter your address"
-                />
-                <span className="focus-border">
-                  <i></i>
-                </span>
-              </TextInput>
+              <TextField
+                id="address"
+                label="Address"
+                type="address"
+                variant="outlined"
+                onChange={handleSigninInputChange}
+                // className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </div>
             <div className="row">
-              <BookingLabel htmlFor="date">Date</BookingLabel>
-              <DatePicker
-                name="date"
+               <TextField
                 id="date"
-                selected={startDate}
-                onChange={date =>
-                  handleSigninInputChange({
-                    label: date.toDateString(),
-                    name: "date",
-                  })
-                }
+                name="date"
+                label="Date"
+                type="date"
+                variant="outlined"
+                onChange={handleSigninInputChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </div>
           </InputRow>
           <InputRow>
-            <div style={{ width: "100%" }}>
+            {/* <div style={{ width: "100%" }}>
               <BookingLabel htmlFor="info">Additional information</BookingLabel>
               <textarea
                 style={{
@@ -246,7 +244,21 @@ export default () => {
                 placeholder="Enter additional information"
                 onChange={handleSigninInputChange}
               />
-            </div>
+            </div> */}
+            <TextField
+                id="info"
+                name="info"
+                label="Additional information"
+                type="text"
+                multiline
+                rows={2}
+                rowsMax={4}
+                variant="outlined"
+                onChange={handleSigninInputChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
           </InputRow>
           <SubmitButton type="button" onClick={handleBookingSubmit}>
             Submit

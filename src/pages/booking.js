@@ -1,6 +1,6 @@
 import React from "react"
 // import SEO from "../components/seo";
-import Hero from "../components/booking"
+import Hero from "../components/booking/newForm"
 
 const Login = () => (
   <>
