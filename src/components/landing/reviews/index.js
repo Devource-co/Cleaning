@@ -44,7 +44,7 @@ const ReviewsView = () => {
       <Container>
         <BorderTitle>What Our Clients Say</BorderTitle>
         <AddReview getData={getData} reviews={reviews || []} />
-        {reviews && (
+        {reviews ? (
           <Swiper {...params}>
             {reviews.map(review => (
               <SlideView>
@@ -63,7 +63,10 @@ const ReviewsView = () => {
               </SlideView>
             ))}
           </Swiper>
-        )}
+        ) : (<SlideView>
+        <p>No reviews left for now, please come back later or be the first one to review.</p>
+      </SlideView>)
+        }
       </Container>
     </StyledBackground>
   )

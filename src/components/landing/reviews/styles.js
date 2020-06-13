@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import mq from "../../../utils/responsiveness"
+import Dialog from '@material-ui/core/Dialog';
 
 export const Container = styled.div`
   margin: 0 auto 0;
@@ -52,28 +53,25 @@ export const SlideView = styled.div`
     margin: 0 auto;
   }
 `
-export const AddReviewpOPuP = styled.div`
-  all: unset;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: auto;
-  overflow: auto;
-  margin: auto;
+export const AddReviewpOPuP = styled(Dialog)`
+  // all: unset;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // bottom: 0;
+  // right: 0;
+  // height: auto;
+  // overflow: auto;
+  // margin: auto;
   position: absolute;
   background: #4e4e53 !important;
-  z-index: 999;
+  // z-index: 999;
   display: flex;
   flex-direction: column;
   padding: 20px 20%;
   border-radius: 5px;
   justify-content: space-around;
-  ${mq({
-    width: ["98%", "80%", "40%"],
-    padding: ["0px 1%", "0px 10%", "0px 20%"],
-  })};
+  
 `
 export const TextInput = styled.textarea`
   z-index: 1000;
@@ -97,6 +95,7 @@ export const ActionButton = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  color: white;
   .submit {
     background: #00c400;
   }
@@ -109,12 +108,13 @@ export const ActionButton = styled.div`
     border-radius: 5px;
   }
 `
-export const PopUpLauncher = styled.button`
+export const PopUpLauncher = styled.span`
   width: 100%;
   text-align: center;
+  cursor: pointer;
   :hover {
     text-decoration: underline;
-    color: #4040a0;
+    color: #82cfff;
   }
 `
 export const ReviewLabel = styled.label``

@@ -1,64 +1,89 @@
-import React, { useState, useEffect } from "react"
-import {
-  BookingInput,
-  SubmitButton,
-  H1,
-  BookingLabel,
-  BookingForm,
-  InputRow,
-  Container,
-  TextInput,
-} from "./main.styles"
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Select from "react-select"
-import NavBar from "../shared/Header"
-import { useImageQuery } from "../../hooks/useImagesQuery"
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import firebase from "../../firebase"
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-import { css } from "emotion"
+import PersonalDetails from './personalDetails';
+import BookingDetails from './bookingDetails';
+import NavBar from "../shared/Header"
+import Confirm from './confirm';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  button: {
+    marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  actionsContainer: {
+    marginBottom: theme.spacing(2),
+  },
+  resetContainer: {
+    padding: theme.spacing(3),
+  },
+  cont: {
+    [theme.breakpoints.down('sm')]: {
+      width: "100%",
+      padding: 0,
+      paddingTop: "3rem",
+    },
+  }
+}));
 
 const typeOptions = [
-  {
-    label: "office cleaning & janitorial services",
-    value: "standard",
-    name: "type",
-  },
-  { label: "carpet cleaning", value: "move in/ move out", name: "type" },
-  { label: "post construction", value: "deep", name: "type" },
+  { label: "office cleaning & janitorial services", value: "standard" },
+  { label: "carpet cleaning", value: "move in/ move out" },
+  { label: "post construction", value: "deep" },
+  { label: "Commercial Cleaning", value: "standard" },
+  { label: "Industrial Cleaning", value: "deep" },
+  { label: "Hospitality Cleaning", value: "standard" },
+  { label: "Hotel Housekeeping", value: "standard" },
+  { label: "Apartment & Condo Building Cleaning", value: "standard" },
+  { label: "Pub & Restaurant Cleaning", value: "standard" },
+  { label: "School & Montessori Cleaning", value: "standard" },
+  { label: "Fumigation & Pest Control", value: "deep" },
 ]
+
 const frequencyOptions = [
-  { label: "once", value: "once", name: "frequency" },
-  { label: "daily", value: "daily", name: "frequency" },
-  { label: "weekly", value: "weekly", name: "frequency" },
-  { label: "bi weekly", value: "bi weekly", name: "frequency" },
-  { label: "monthly", value: "monthly", name: "frequency" },
+  { label: "once", value: "once" },
+  { label: "daily", value: "daily" },
+  { label: "weekly", value: "weekly" },
+  { label: "bi weekly", value: "bi weekly" },
+  { label: "monthly", value: "monthly" },
 ]
-export default () => {
-  const [signInData, setSignInData] = useState({})
+
+function getSteps() {
+  return ['Please fill your personal details', 'Create a booking', 'Confirm Details & Submit the form'];
+}
+
+export default function VerticalLinearStepper() {
+  const [formData, setFormData] = useState({
+    type: {label:"office cleaning & janitorial services", value:"standard"},
+    frequency : "once",
+    name: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    estimatedBudget: "",
+  })
   const [bookingData, setBookingData] = useState([])
+  let errors;
+  const [error, setError] = useState(false);
   const [startDate ] = useState(new Date())
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
 
   useEffect(() => {
     getFirestoreData()
   }, [])
-  const handleSigninInputChange = e => {
-    if (e.target) {
-      e.preventDefault()
-      const { name, value } = e.target
-      setSignInData({ ...signInData, [name]: value })
-    } else {
-      if (e.name) {
-        const { label, value, name } = e
-        setSignInData({ ...signInData, [name]: label })
-      } else {
-        setSignInData({ ...signInData, [e[0].name]: e })
-      }
-    }
-  }
 
   const getFirestoreData = async () => {
     await firebase
@@ -79,193 +104,113 @@ export default () => {
       .update({
         bookings: [
           ...bookingData[0].bookings,
-          { ...signInData, createdAt: startDate.toDateString() },
+          { ...formData, createdAt: startDate.toDateString() },
         ],
       })
   }
 
   const handleBookingSubmit = e => {
-    e.preventDefault()
+    setError(false);
+    errors=false
+    Object.values(formData).forEach((value) => {
+      if(!value) {
+        setError(true);
+        errors=true
+        return;
+      }
+    })
 
-    writeFirestore()
-    getFirestoreData()
+    if(!errors) {
+      writeFirestore()
+      getFirestoreData()
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+  }
+  console.log(bookingData)
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <PersonalDetails setFormData={setFormData} formData={formData} />;
+      case 1:
+        return <BookingDetails setFormData={setFormData} formData={formData} frequencyOptions={frequencyOptions} typeOptions={typeOptions} />;
+      case 2:
+        return <Confirm formData={formData} error={error} />;
+      default:
+        return 'Unknown step';
+    }
   }
 
-  const { logo } = useImageQuery()
+  const handleNext = (e) => {
+    e.preventDefault()
+    if(activeStep === steps.length - 1) {
+      handleBookingSubmit(e);
+      return;
+    }
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+    setFormData({
+      type: {label:"office cleaning & janitorial services", value:"standard"},
+      frequency : "once",
+      name: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      estimatedBudget: "",
+    })
+  };
+
   return (
     <>
-      <NavBar />
-      <Container>
-        <BookingForm onSubmit={handleBookingSubmit}>
-          <H1
-            className={css`
-              margin-bottom: 50px;
-            `}
-          >
-            Make a booking
-          </H1>
-          <InputRow>
-            <div className="row">
-              <BookingLabel htmlFor="name">Full name</BookingLabel>
-              <TextInput>
-                <BookingInput
-                  id="name"
-                  name="name"
-                  onChange={handleSigninInputChange}
-                  type="text"
-                  placeholder="Enter your full name"
-                />
-                <span className="focus-border">
-                  <i></i>
-                </span>
-              </TextInput>
-            </div>
-            <div className="row">
-              <BookingLabel htmlFor="email">email</BookingLabel>
-              <TextInput>
-                <BookingInput
-                  id="email"
-                  name="email"
-                  onChange={handleSigninInputChange}
-                  type="email"
-                  placeholder="Enter your email"
-                />
-                <span className="focus-border">
-                  <i></i>
-                </span>
-              </TextInput>
-            </div>
-          </InputRow>
-          <InputRow>
-            <div className="row">
-              <BookingLabel htmlFor="phoneNumber">Phone number</BookingLabel>
-              <TextInput>
-                <BookingInput
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  onChange={handleSigninInputChange}
-                  type="text"
-                  placeholder="Enter your Phone number"
-                />
-                <span className="focus-border">
-                  <i></i>
-                </span>
-              </TextInput>
-            </div>
-            <div className="row">
-              <BookingLabel htmlFor="estimatedBudget">
-                Estimated budget
-              </BookingLabel>
-              <TextInput>
-                <BookingInput
-                  id="estimatedBudget"
-                  name="estimatedBudget"
-                  onChange={handleSigninInputChange}
-                  type="estimatedBudget"
-                  placeholder="Enter your estimated budget"
-                />
-                <span className="focus-border">
-                  <i></i>
-                </span>
-              </TextInput>
-            </div>
-          </InputRow>
-
-          <InputRow>
-            <div className="row">
-              <BookingLabel htmlFor="type">Type</BookingLabel>
-              <Select
-                className="select"
-                name="type"
-                id="type"
-                options={typeOptions}
-                onChange={e =>
-                  handleSigninInputChange({
-                    name: e.name,
-                    label: { label: e.label, value: e.value },
-                  })
-                }
-              />
-            </div>
-            <div className="row">
-              <BookingLabel htmlFor="frequency">frequency</BookingLabel>
-              <Select
-                className="select"
-                name="frequency"
-                id="frequency"
-                options={frequencyOptions}
-                onChange={handleSigninInputChange}
-              />
-            </div>
-          </InputRow>
-          <InputRow>
-            <div className="row">
-              <TextField
-                id="address"
-                label="Address"
-                type="address"
-                variant="outlined"
-                onChange={handleSigninInputChange}
-                // className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </div>
-            <div className="row">
-               <TextField
-                id="date"
-                name="date"
-                label="Date"
-                type="date"
-                variant="outlined"
-                onChange={handleSigninInputChange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </div>
-          </InputRow>
-          <InputRow>
-            {/* <div style={{ width: "100%" }}>
-              <BookingLabel htmlFor="info">Additional information</BookingLabel>
-              <textarea
-                style={{
-                  width: "100%",
-                  minHeight: "100px",
-                  padding: 10,
-                  border: "solid 1px #c6c6ca",
-                  marginBottom: "20px",
-                }}
-                id="info"
-                name="info"
-                onChange={handleSigninInputChange}
-                type="text"
-                placeholder="Enter additional information"
-                onChange={handleSigninInputChange}
-              />
-            </div> */}
-            <TextField
-                id="info"
-                name="info"
-                label="Additional information"
-                type="text"
-                multiline
-                rows={2}
-                rowsMax={4}
-                variant="outlined"
-                onChange={handleSigninInputChange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-          </InputRow>
-          <SubmitButton type="button" onClick={handleBookingSubmit}>
-            Submit
-          </SubmitButton>
-        </BookingForm>
-      </Container>
-      <ToastContainer />
+    <NavBar />
+    <Container>
+      <Stepper className={classes.cont} activeStep={activeStep} orientation="vertical">
+        {steps.map((label, index) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+            <StepContent>
+              <form>
+              <div>{getStepContent(index)}</div>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    type="submit"
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+              </form>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+      {activeStep === steps.length && (
+        <Paper square elevation={0} className={classes.resetContainer}>
+          <Typography>Successful received your booking information, we'll get back to you as soon as possible</Typography>
+          <Button onClick={handleReset} className={classes.button}>
+            Reset
+          </Button>
+        </Paper>
+      )}
+    </Container>
     </>
-  )
+  );
 }
