@@ -1,11 +1,8 @@
 import React from "react"
-// import SEO from "../components/seo";
-import Hero from "../components/dashboard"
+import Dashboard from "../components/dashboard"
 
 const Login = () => (
-  <>
-    <Hero />
-  </>
+  <Dashboard />
 )
 
 export default Login

@@ -54,8 +54,8 @@ const ReviewsView = ({ reviews, getData }) => {
           <ReviewLabel>Rating</ReviewLabel>
           <StarRatings
             rating={rating}
-            starRatedColor="#00c400"
-            starHoverColor="#4040a0"
+            starRatedColor="#ffd700"
+            starHoverColor="#ffd700"
             changeRating={changeRating}
             numberOfStars={5}
             name="rating"

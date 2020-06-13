@@ -83,9 +83,9 @@ const Footer = () => {
             </Contact>
           </FirstCont>
           <SecondCont>
-            <a href="#"><FaFacebookSquare /></a>
-            <a href="#"><FaInstagramSquare /></a>
-            <a href="#"><FaTwitter /></a>
+            <a href="/#" aria-labelledby="facebook"><FaFacebookSquare /></a>
+            <a href="/#" aria-labelledby="instagram"><FaInstagramSquare /></a>
+            <a href="/#" aria-labelledby="twitter"><FaTwitter /></a>
           </SecondCont>
         </Section>
         <Section>

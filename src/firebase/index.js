@@ -26,11 +26,14 @@ export const getUserData = setBookingData => {
     setBookingData(snapshot.val())
   })
 }
+
+export const auth = firebase.auth();
+
 export const signInUser = async data => {
   try {
-    const result = await firebase
-      .auth()
+    const result = await auth
       .signInWithEmailAndPassword(data.email, data.password)
+    console.log("========================>", result)
     localStorage.setItem("token", result.user.refreshToken)
     toast("success", "Successfully  logged in")
     return result

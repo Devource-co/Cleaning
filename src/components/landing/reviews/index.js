@@ -53,8 +53,8 @@ const ReviewsView = () => {
                   edit={false}
                   value={review.rating}
                   count={5}
-                  size={5}
-                  color2={"#ffd700"}
+                  size={30}
+                  color={"#ffd700"}
                 />
                 <h5>
                   {review.role} at {review.company}

@@ -16,7 +16,7 @@ export default () => {
           </Link>
         </div>
 
-        <input checked={checked} onChange={() => setChecked(!checked)} className="menu-btn hidden" type="checkbox" id="menu-btn" />
+        <input aria-labelledby="toggle" checked={checked} onChange={() => setChecked(!checked)} className="menu-btn hidden" type="checkbox" id="menu-btn" />
         <label
           className="menu-icon block cursor-pointer lg:hidden px-2 py-4 relative select-none"
           htmlFor="menu-btn"
@@ -36,36 +36,44 @@ export default () => {
             </Link>
           </li>
 
-          <li onClick={() => setChecked(!checked)} className="border-t md:border-none">
+          <li className="border-t md:border-none">
+            <div onKeyPress={() => {}} role="button" tabIndex="0"  onClick={() => setChecked(!checked)}>
             <AnchorLink
               to="/#about"
               title="About"
               className="block md:inline-block px-3 py-3 no-underline md:hover:underline text-gray-800 hover:text-blue-600 font-semibold"
             />
+            </div>
           </li>
 
-          <li onClick={() => setChecked(!checked)} className="border-t md:border-none">
+          <li className="border-t md:border-none">
+          <div onKeyPress={() => {}} role="button" tabIndex="0"  onClick={() => setChecked(!checked)}>
             <AnchorLink
               to="/#services"
               title="Services"
               className="block md:inline-block px-3 py-3 no-underline md:hover:underline text-gray-800 hover:text-blue-600 font-semibold"
             />
+            </div>
           </li>
 
-          <li onClick={() => setChecked(!checked)} className="border-t md:border-none">
+          <li className="border-t md:border-none">
+          <div onKeyPress={() => {}} role="button" tabIndex="0"  onClick={() => setChecked(!checked)}>
             <AnchorLink
               to="/#gallery"
               title="Gallery"
               className="block md:inline-block px-3 py-3 no-underline md:hover:underline text-gray-800 hover:text-blue-600 font-semibold"
             />
+            </div>
           </li>
 
-          <li onClick={() => setChecked(!checked)} className="border-t md:border-none">
-            <AnchorLink
-              to="/#contact"
-              title="Contact"
-              className="block md:inline-block px-3 py-3 no-underline md:hover:underline text-gray-800 hover:text-blue-600 font-semibold"
-            />
+          <li className="border-t md:border-none">
+            <div onKeyPress={() => {}} role="button" tabIndex="0"  onClick={() => setChecked(!checked)}>
+              <AnchorLink
+                to="/#contact"
+                title="Contact"
+                className="block md:inline-block px-3 py-3 no-underline md:hover:underline text-gray-800 hover:text-blue-600 font-semibold"
+              />
+            </div>
           </li>
 
           <li className="border-t md:border-none">
