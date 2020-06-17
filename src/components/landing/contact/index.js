@@ -3,6 +3,7 @@ import { css } from "emotion"
 import { useForm } from "react-hook-form"
 import contactImage from "../../../images/contact.svg"
 import firebase from "../../../firebase"
+import axios from "axios"
 import {
   Container,
   BorderTitle,
@@ -70,7 +71,7 @@ const ContactView = () => {
 
   const handleContactSubmit = e => {
     e.preventDefault()
-
+    axios.post("https://cleaningbackend.herokuapp.com/message", contactData)
     writeFirestore()
     getFirestoreData()
   }
