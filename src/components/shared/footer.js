@@ -72,14 +72,14 @@ const Footer = () => {
         <Section>
           <FirstCont>
             <Logo>
-              <h2>SpectacleClean</h2>
+              <h2>CresitClean</h2>
               <h6>Happiness is a clean place</h6>
             </Logo>
             <Contact>
               <h6>Nairobi , Kenya</h6>
-              <h6>PO Box 62085-00200, Kenya.</h6>
-              <h6>+254 741 092 840 / +254 774 592 916</h6>
-              <h6>spectacleclean@gmail.com</h6>
+              <h6>PO Box 00000-00200, Kenya.</h6>
+              <h6>+254 702 602 164 / +254 705 675 199</h6>
+              <h6>cresentclean@gmail.com</h6>
             </Contact>
           </FirstCont>
           <SecondCont>
@@ -89,7 +89,7 @@ const Footer = () => {
           </SecondCont>
         </Section>
         <Section>
-          <FootEl>&copy;{new Date().getFullYear()} SpectacleClean. All rights Reserved</FootEl>
+          <FootEl>&copy;{new Date().getFullYear()} CresitClean. All rights Reserved</FootEl>
           <FootEl>Terms of service | Privacy Policy</FootEl>
         </Section>
       </Container>

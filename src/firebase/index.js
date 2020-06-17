@@ -1,4 +1,4 @@
-import firebase from "firebase"
+import firebase from "firebase/app"
 import { toast } from "react-toastify"
 import "@firebase/auth"
 import "@firebase/firestore"
@@ -33,7 +33,6 @@ export const signInUser = async data => {
   try {
     const result = await auth
       .signInWithEmailAndPassword(data.email, data.password)
-    console.log("========================>", result)
     localStorage.setItem("token", result.user.refreshToken)
     toast("success", "Successfully  logged in")
     return result

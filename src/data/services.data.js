@@ -147,37 +147,6 @@ const data = [
       </ul>
     </div>)
   },
-  {
-    index: 10,
-    title: 'Carpet & Upholstery',
-    icon: <AiOutlineGroup />,
-    description: `Our cleaning specialists use our highly-effective hot-water extraction method to remove ground-in dirt and debris that may or may not be visible to the naked eye without the abrasive brushing of other cleaning methods.`,
-    content: (<div className="content">
-      <p>When it comes to Carpets and upholstery, the list is endless- accidental spillages through liquids and some dry materials can cause permanent stains; Organic materials and germs can hide in the fabric.</p>
-      <p>All of these conditions, if not treated promptly and with appropriate methods, can create an unsightly and unhealthy environment. SpectacleClean cleaning team provides a periodic service that evaluates and assigns the cleaning method and frequency. Our equipment, processes, and cleaning products are all chosen to provide an effective, safe and environmentally friendly cleaning experience, every time.</p>
-      <p>Our cleaning specialists use our highly-effective hot-water extraction method to remove ground-in dirt and debris that may or may not be visible to the naked eye without the abrasive brushing of other cleaning methods.</p>
-    </div>)
-  },
-  {
-    index: 11,
-    title: 'Fumigation & Pest Control',
-    icon: <AiFillBug />,
-    description: `SpectacleClean Home, School and Office Fumigation and Pest control is very effective in getting rid of roaches’, bedbugs, termites, rats and snakes among others.`,
-    content: (<div className="content">
-      <p>Fumigation is the most effective technique used for controlling pests.</p>
-      <p>SpectacleClean Home, School and Office Fumigation and Pest control is very effective in getting rid of roaches’, bedbugs, termites, rats and snakes among others.</p>
-      <h5>Why we are different.</h5>
-      <ul>
-        <li>We perform a professional pest control inspection before starting the treatment.</li>
-        <li>We estimate the type and the level of pest infestation to ensure the most effective method and substances are used.</li>
-        <li>We will deliver post-treatment, if necessary until full pest elimination is achieved</li>
-        <li>Our services comply with Control of Substance Hazardous to Health regulations, meaning that our fumigants will be used safely around your property.</li>
-        <li>We will advise you 0on how to protect your property from future infestation.</li>
-        <li>Our fumigation specialists will revisit you after a month to observe the process and ensure success.</li>
-        <li>You can rest be assured that our professional team will eliminate all pests from your property so that you can love where you work, live and play.</li>
-      </ul>
-    </div>)
-  }
 ]
 
 export default data;
