@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import React, { useState, useEffect } from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Stepper from "@material-ui/core/Stepper"
+import Step from "@material-ui/core/Step"
+import StepLabel from "@material-ui/core/StepLabel"
+import StepContent from "@material-ui/core/StepContent"
+import Button from "@material-ui/core/Button"
+import Paper from "@material-ui/core/Paper"
+import Typography from "@material-ui/core/Typography"
+import Container from "@material-ui/core/Container"
 import firebase from "../../firebase"
-import PersonalDetails from './personalDetails';
-import BookingDetails from './bookingDetails';
+import PersonalDetails from "./personalDetails"
+import BookingDetails from "./bookingDetails"
 import NavBar from "../shared/Header"
-import Confirm from './confirm';
+import Confirm from "./confirm"
+import axios from "axios"
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   button: {
     marginTop: theme.spacing(1),
@@ -29,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   cont: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%",
       padding: 0,
       paddingTop: "3rem",
     },
-  }
-}));
+  },
+}))
 
 const typeOptions = [
   { label: "office cleaning & janitorial services", value: "standard" },
@@ -60,13 +61,17 @@ const frequencyOptions = [
 ]
 
 function getSteps() {
-  return ['Please fill your personal details', 'Create a booking', 'Confirm Details & Submit the form'];
+  return [
+    "Please fill your personal details",
+    "Create a booking",
+    "Confirm Details & Submit the form",
+  ]
 }
 
 export default function VerticalLinearStepper() {
   const [formData, setFormData] = useState({
-    type: {label:"office cleaning & janitorial services", value:"standard"},
-    frequency : "once",
+    type: { label: "office cleaning & janitorial services", value: "standard" },
+    frequency: "once",
     name: "",
     email: "",
     phoneNumber: "",
@@ -74,12 +79,12 @@ export default function VerticalLinearStepper() {
     estimatedBudget: "",
   })
   const [bookingData, setBookingData] = useState([])
-  let errors;
-  const [error, setError] = useState(false);
-  const [startDate ] = useState(new Date())
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
+  let errors
+  const [error, setError] = useState(false)
+  const [startDate] = useState(new Date())
+  const classes = useStyles()
+  const [activeStep, setActiveStep] = React.useState(0)
+  const steps = getSteps()
 
   useEffect(() => {
     getFirestoreData()
@@ -110,107 +115,125 @@ export default function VerticalLinearStepper() {
   }
 
   const handleBookingSubmit = e => {
-    setError(false);
-    errors=false
-    Object.values(formData).forEach((value) => {
-      if(!value) {
-        setError(true);
-        errors=true
-        return;
+    setError(false)
+    errors = false
+    Object.values(formData).forEach(value => {
+      if (!value) {
+        setError(true)
+        errors = true
+        return
       }
     })
 
-    if(!errors) {
+    if (!errors) {
+      axios.post("https://cleaningbackend.herokuapp.com/booking", formData)
       writeFirestore()
       getFirestoreData()
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep(prevActiveStep => prevActiveStep + 1)
     }
   }
   console.log(bookingData)
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <PersonalDetails setFormData={setFormData} formData={formData} />;
+        return <PersonalDetails setFormData={setFormData} formData={formData} />
       case 1:
-        return <BookingDetails setFormData={setFormData} formData={formData} frequencyOptions={frequencyOptions} typeOptions={typeOptions} />;
+        return (
+          <BookingDetails
+            setFormData={setFormData}
+            formData={formData}
+            frequencyOptions={frequencyOptions}
+            typeOptions={typeOptions}
+          />
+        )
       case 2:
-        return <Confirm formData={formData} error={error} />;
+        return <Confirm formData={formData} error={error} />
       default:
-        return 'Unknown step';
+        return "Unknown step"
     }
   }
 
-  const handleNext = (e) => {
+  const handleNext = e => {
     e.preventDefault()
-    if(activeStep === steps.length - 1) {
-      handleBookingSubmit(e);
-      return;
+    if (activeStep === steps.length - 1) {
+      handleBookingSubmit(e)
+      return
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep + 1)
+  }
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep - 1)
+  }
 
   const handleReset = () => {
-    setActiveStep(0);
+    setActiveStep(0)
     setFormData({
-      type: {label:"office cleaning & janitorial services", value:"standard"},
-      frequency : "once",
+      type: {
+        label: "office cleaning & janitorial services",
+        value: "standard",
+      },
+      frequency: "once",
       name: "",
       email: "",
       phoneNumber: "",
       address: "",
       estimatedBudget: "",
     })
-  };
+  }
 
   return (
     <>
-    <NavBar />
-    <Container>
-      <Stepper className={classes.cont} activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              <form>
-              <div>{getStepContent(index)}</div>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    type="submit"
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
-                </div>
-              </div>
-              </form>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>Successful received your booking information, we'll get back to you as soon as possible</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </Container>
+      <NavBar />
+      <Container>
+        <Stepper
+          className={classes.cont}
+          activeStep={activeStep}
+          orientation="vertical"
+        >
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+              <StepContent>
+                <form>
+                  <div>{getStepContent(index)}</div>
+                  <div className={classes.actionsContainer}>
+                    <div>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        className={classes.button}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        type="submit"
+                        className={classes.button}
+                      >
+                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <Paper square elevation={0} className={classes.resetContainer}>
+            <Typography>
+              Successful received your booking information, we'll get back to
+              you as soon as possible
+            </Typography>
+            <Button onClick={handleReset} className={classes.button}>
+              Reset
+            </Button>
+          </Paper>
+        )}
+      </Container>
     </>
-  );
+  )
 }
