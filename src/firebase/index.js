@@ -1,4 +1,4 @@
-import firebase from "firebase"
+import firebase from "firebase/app"
 import { toast } from "react-toastify"
 import "@firebase/auth"
 import "@firebase/firestore"
