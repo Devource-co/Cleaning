@@ -52,6 +52,8 @@ const ContactView = () => {
       .get()
       .then(querySnapshot => {
         const result = querySnapshot.docs.map(doc => doc.data())
+        console.log("KKKKKKKK", result)
+
         setBookingData(result)
       })
   }
