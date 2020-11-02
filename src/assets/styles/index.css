@@ -3,3 +3,31 @@
 @tailwind components;
 
 @tailwind utilities;
+
+/* TODO: change family in future*/
+html, body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: #c4fcf2;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  @apply text-gray-900;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+@keyframes toggleNav {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
